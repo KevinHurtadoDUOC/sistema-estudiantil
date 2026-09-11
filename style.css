@@ -211,7 +211,7 @@ input:focus {
 }
 
 /* Badges de Estado (mantiene compatibilidad con script.js) */
-.aprobado, .reprobado {
+.aprobado, .reprobado, .inasistencia {
     display: inline-block;
     padding: 0.2rem 0.55rem;
     font-size: 0.75rem;
@@ -228,4 +228,9 @@ input:focus {
 .reprobado {
     background-color: var(--badge-danger-bg);
     color: var(--badge-danger-text);
+}
+
+.inasistencia {
+    background-color: #fef3c7;
+    color: #92400e;
 }

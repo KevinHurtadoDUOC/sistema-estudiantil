@@ -6,6 +6,7 @@ function agregarEstudiante() {
         document.getElementById('nota2'),
         document.getElementById('nota3')
     ];
+    const asistenciaInput = document.getElementById('asistencia');
     const tablaEstudiantes = document.getElementById('tablaEstudiantes');
     const formEstudiante = document.getElementById('formEstudiante');
 
@@ -32,14 +33,37 @@ function agregarEstudiante() {
         notasNumericas.push(notaNumerica);
     }
 
+    const asistencia = asistenciaInput.value.trim();
+    const asistenciaNumerica = Number(asistencia);
+
+    if (!asistencia || !Number.isFinite(asistenciaNumerica) || asistenciaNumerica < 0 || asistenciaNumerica > 100) {
+        alert('La asistencia ingresada debe ser un valor numérico válido en el rango de 0% a 100%.');
+        asistenciaInput.focus();
+        return;
+    }
+
     const promedioFinal = (
         (notasNumericas[0] * 0.3) +
         (notasNumericas[1] * 0.4) +
         (notasNumericas[2] * 0.3)
     );
 
-    const estado = promedioFinal >= 4 ? 'Aprobado' : 'Reprobado';
-    const estadoClase = promedioFinal >= 4 ? 'aprobado' : 'reprobado';
+    let estado = 'Reprobado';
+    let estadoClase = 'reprobado';
+
+    if (asistenciaNumerica < 60) {
+        estado = 'Reprobado por inasistencia';
+        estadoClase = 'inasistencia';
+    } else if (asistenciaNumerica >= 60 && asistenciaNumerica < 70) {
+        if (promedioFinal >= 5) {
+            estado = 'Aprobado';
+            estadoClase = 'aprobado';
+        }
+    } else if (promedioFinal >= 4) {
+        estado = 'Aprobado';
+        estadoClase = 'aprobado';
+    }
+
     const promedioClase = promedioFinal < 4 ? 'promedio-bajo' : '';
 
     tablaEstudiantes.insertAdjacentHTML(
