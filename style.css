@@ -202,6 +202,14 @@ input:focus {
     background-color: #f1f5f9;
 }
 
+.promedio-bajo {
+    color: var(--badge-danger-text);
+    font-weight: 700;
+    background-color: #fee2e2;
+    border-radius: 6px;
+    padding: 0.2rem 0.5rem;
+}
+
 /* Badges de Estado (mantiene compatibilidad con script.js) */
 .aprobado, .reprobado {
     display: inline-block;
